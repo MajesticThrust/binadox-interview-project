@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.item {
+  flex: 1 1 auto;
+}
+
+.circle {
+  border-radius: 50%;
+  text-align: center;
+  background: gray;
+  // font-size: 50px;
+  width: 1.75em;
+  height: 1.75em;
+}

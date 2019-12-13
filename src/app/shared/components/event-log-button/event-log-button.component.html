@@ -1,0 +1,11 @@
+<button mat-icon-button>
+  <!-- TODO find out why color doesn't work -->
+  <mat-icon
+    svgIcon="event-log-button"
+    [color]="(haveUnread | async) ? 'accent' : 'prime'"
+    [matBadge]="unreadEventCount | async"
+    [matBadgeHidden]="!haveUnread | async"
+    matBadgePosition="above after"
+    matBadgeSize="small"
+  ></mat-icon>
+</button>
