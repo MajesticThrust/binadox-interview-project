@@ -8,7 +8,17 @@ interface IconDefinition {
 }
 
 const icons: IconDefinition[] = [
-  { name: "event-log-button", url: "assets/icons/event-log-button.svg" }
+  { name: "event-log-button", url: "assets/icons/event-log-button.svg" },
+  { name: "dashboard", url: "assets/icons/main-menu-icons/dashboard-icon.svg" },
+  { name: "app-utilization", url: "assets/icons/main-menu-icons/app-utilization.svg" },
+  { name: "user-details", url: "assets/icons/main-menu-icons/user-details.svg" },
+  { name: "discovery", url: "assets/icons/main-menu-icons/shadow-it.svg" },
+  { name: "renewal", url: "assets/icons/main-menu-icons/renewal-icon.svg" },
+  { name: "advice", url: "assets/icons/main-menu-icons/advice-icon.svg" },
+  { name: "integration", url: "assets/icons/main-menu-icons/integration-icon.svg" },
+  { name: "settings", url: "assets/icons/main-menu-icons/settings-icon.svg" },
+  { name: "sys-config", url: "assets/icons/main-menu-icons/sys-config-icon.svg" },
+  { name: "event-log", url: "assets/icons/main-menu-icons/event-log-icon.svg" }
 ];
 
 @Injectable({
