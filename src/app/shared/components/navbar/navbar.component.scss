@@ -1,11 +1,11 @@
-.space-filler {
-  flex: 1 1 auto;
-}
+.toolbar {
+  padding-right: 64px;
 
-.item {
-  margin: 0 1rem;
-}
+  .space-filler {
+    flex: 1 1 auto;
+  }
 
-.margin-right {
-  margin-right: 3rem;
+  .item {
+    margin: 0 1rem;
+  }
 }
