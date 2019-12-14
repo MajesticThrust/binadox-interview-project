@@ -1,6 +1,8 @@
 <div class="container">
+  <!-- header -->
   <app-navbar class="navbar"></app-navbar>
 
+  <!-- content -->
   <mat-sidenav-container class="content">
     <mat-sidenav mode="side" opened disableClose>
       <mat-nav-list>
@@ -15,8 +17,11 @@
       </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content class="sidenav-content">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
+  <!-- footer -->
+  <app-footer class="footer"></app-footer>
 </div>

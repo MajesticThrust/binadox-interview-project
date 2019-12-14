@@ -9,9 +9,15 @@ import {
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { EventLogButtonComponent } from "./components/event-log-button/event-log-button.component";
 import { UserButtonComponent } from "./components/user-button/user-button.component";
+import { FooterComponent } from "./components/footer/footer.component";
 
 @NgModule({
-  declarations: [NavbarComponent, EventLogButtonComponent, UserButtonComponent],
+  declarations: [
+    NavbarComponent,
+    EventLogButtonComponent,
+    UserButtonComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -19,6 +25,6 @@ import { UserButtonComponent } from "./components/user-button/user-button.compon
     MatIconModule,
     MatBadgeModule
   ],
-  exports: [NavbarComponent]
+  exports: [NavbarComponent, FooterComponent]
 })
 export class SharedModule {}

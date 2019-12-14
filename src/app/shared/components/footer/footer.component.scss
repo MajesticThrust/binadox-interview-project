@@ -1,0 +1,38 @@
+.footer {
+  padding: 16px 64px;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+
+  .item {
+    flex: 0 1 auto;
+  }
+
+  .copyright-block {
+    width: 576px;
+
+    p {
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+    }
+  }
+
+  .space-filler {
+    flex: 1 1 auto;
+  }
+
+  .footer-button {
+    height: 50px;
+    border-radius: 25px;
+
+    .button-icon {
+      font-size: 30px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .button-text {
+      margin-left: 16px;
+    }
+  }
+}
