@@ -18,7 +18,8 @@ const icons: IconDefinition[] = [
   { name: "integration", url: "assets/icons/main-menu-icons/integration-icon.svg" },
   { name: "settings", url: "assets/icons/main-menu-icons/settings-icon.svg" },
   { name: "sys-config", url: "assets/icons/main-menu-icons/sys-config-icon.svg" },
-  { name: "event-log", url: "assets/icons/main-menu-icons/event-log-icon.svg" }
+  { name: "event-log", url: "assets/icons/main-menu-icons/event-log-icon.svg" },
+  { name: "office365", url: "assets/icons/office365.svg" }
 ];
 
 @Injectable({

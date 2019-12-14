@@ -1,1 +1,35 @@
-<p>app-utilization works!</p>
+<div class="item">
+  <button mat-button>
+    <img src="assets/icons/back-button.png" />
+    <span class="button-text">
+      Back
+    </span>
+  </button>
+</div>
+
+<div class="item product-name">
+  <!-- TODO move to parameters? -->
+  <span class="product-text">Office 365</span>
+  <mat-icon svgIcon="office365" class="product-icon"></mat-icon>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="item">
+  <nav mat-tab-nav-bar class="tab-group" animationDuration="0ms">
+    <a
+      mat-tab-link
+      class="tab"
+      *ngFor="let link of tabLinks"
+      [routerLink]="link.path"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive"
+      >{{ link.name }}</a
+    >
+  </nav>
+
+  <div class="tab-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
