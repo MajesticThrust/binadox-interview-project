@@ -1,0 +1,22 @@
+.table-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  .item {
+    flex: 0 1 auto;
+    margin: 0 16px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .space-filler {
+    flex: 1 1 auto;
+  }
+}

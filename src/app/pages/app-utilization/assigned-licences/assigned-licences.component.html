@@ -1,1 +1,21 @@
-<p>assigned-licences works!</p>
+<div class="table-controls">
+  <mat-checkbox
+    class="item"
+    [ngModel]="checkboxes.underutilizedLicences"
+    (ngModelChange)="checkUnderutilizedLicences()"
+    >Show underutilized licences</mat-checkbox
+  >
+  <mat-checkbox
+    class="item"
+    [ngModel]="checkboxes.abandonedLicences"
+    (ngModelChange)="checkAbandonedLicences()"
+    >Show abandoned licences</mat-checkbox
+  >
+  <span class="space-filler"></span>
+
+  <mat-form-field class="item" appearance="outline">
+    <mat-label>Search</mat-label>
+    <input matInput type="search" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
