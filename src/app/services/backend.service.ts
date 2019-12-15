@@ -6,6 +6,13 @@ import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 
+export enum ListSortOrder {
+  /** Ascending order */
+  asc = "asc",
+  /** Descending order */
+  desc = "desc"
+}
+
 export interface ListParams {
   /** search query */
   query?: string;
@@ -16,10 +23,10 @@ export interface ListParams {
   /** sorted fields */
   sort?: string | string[];
   /** sorting order; default - ascending */
-  order?: "asc" | "desc" | ("asc" | "desc")[];
+  order?: ListSortOrder | ListSortOrder[];
 }
 
-export interface UsersResponse {
+export interface AssignedLicencesResponseItem {
   accountUsageDataDto: AccountUsageData;
   usageDetailDto: UsageDetail;
 }
@@ -30,26 +37,30 @@ export interface UsersResponse {
 export class BackendService {
   constructor(private http: HttpClient) {}
 
-  public users(params: ListParams): Observable<UsersResponse> {
+  public assignedLicences(
+    params: ListParams
+  ): Observable<AssignedLicencesResponseItem[]> {
     const url = `${environment.backendUrl}/users`;
 
     return this.http
-      .get<UsersResponse>(url, {
+      .get<AssignedLicencesResponseItem[]>(url, {
         params: this.listParamsToHttp(params)
       })
       .pipe(
-        map(({ accountUsageDataDto, usageDetailDto }) => {
-          accountUsageDataDto = new AccountUsageData().deserialize(
-            accountUsageDataDto
-          );
-          usageDetailDto = new UsageDetail().deserialize(usageDetailDto);
+        map(response => {
+          return response.map(({ accountUsageDataDto, usageDetailDto }) => {
+            accountUsageDataDto = new AccountUsageData().deserialize(
+              accountUsageDataDto
+            );
+            usageDetailDto = new UsageDetail().deserialize(usageDetailDto);
 
-          const result: UsersResponse = {
-            accountUsageDataDto,
-            usageDetailDto
-          };
+            const result: AssignedLicencesResponseItem = {
+              accountUsageDataDto,
+              usageDetailDto
+            };
 
-          return result;
+            return result;
+          });
         })
       );
   }
@@ -65,10 +76,10 @@ export class BackendService {
     return new HttpParams({
       fromObject: {
         q: params.query,
-        page,
-        limit,
-        sort,
-        order
+        _page: page,
+        _limit: limit,
+        _sort: sort,
+        _order: order
       }
     });
   }

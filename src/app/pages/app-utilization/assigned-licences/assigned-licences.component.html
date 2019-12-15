@@ -3,19 +3,68 @@
     class="item"
     [ngModel]="checkboxes.underutilizedLicences"
     (ngModelChange)="checkUnderutilizedLicences()"
-    >Show underutilized licences</mat-checkbox
   >
+    Show underutilized licences
+  </mat-checkbox>
   <mat-checkbox
     class="item"
     [ngModel]="checkboxes.abandonedLicences"
     (ngModelChange)="checkAbandonedLicences()"
-    >Show abandoned licences</mat-checkbox
   >
+    Show abandoned licences
+  </mat-checkbox>
   <span class="space-filler"></span>
 
   <mat-form-field class="item" appearance="outline">
     <mat-label>Search</mat-label>
-    <input matInput type="search" />
+    <input matInput type="search" (input)="filter($event)"/>
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
+
+<table cdk-table class="table" [dataSource]="dataSource" [trackBy]="trackBy">
+  <ng-container cdkColumnDef="name">
+    <th cdk-header-cell *cdkHeaderCellDef>Name</th>
+    <td cdk-cell *cdkCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container cdkColumnDef="email">
+    <th cdk-header-cell *cdkHeaderCellDef>Email</th>
+    <td cdk-cell *cdkCellDef="let element">{{ element.email }}</td>
+  </ng-container>
+
+  <ng-container cdkColumnDef="appUtilizationPercent">
+    <th cdk-header-cell *cdkHeaderCellDef>
+      App Utilization %
+    </th>
+    <td cdk-cell *cdkCellDef="let element">
+      {{ element.appUtilizationPercent }}%
+    </td>
+  </ng-container>
+
+  <ng-container cdkColumnDef="lastActive">
+    <th cdk-header-cell *cdkHeaderCellDef>
+      Last Active
+    </th>
+    <td cdk-cell *cdkCellDef="let element">
+      {{ element.lastActive.format("DD MMM YYYY") }}
+    </td>
+  </ng-container>
+
+  <ng-container cdkColumnDef="billingPeriod">
+    <th cdk-header-cell *cdkHeaderCellDef>
+      Billing Period
+    </th>
+    <td cdk-cell *cdkCellDef="let element">{{ element.billingPeriod }}</td>
+  </ng-container>
+
+  <ng-container cdkColumnDef="paymentPlan">
+    <th cdk-header-cell *cdkHeaderCellDef>
+      Payment Plan
+    </th>
+    <td cdk-cell *cdkCellDef="let element">{{ element.paymentPlan }}</td>
+  </ng-container>
+
+  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+  <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
+</table>

@@ -7,9 +7,9 @@ import {
   MatTabsModule,
   MatCheckboxModule,
   MatInputModule,
-  MatTableModule,
   MatFormFieldModule
 } from "@angular/material";
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { AppUtilizationRoutingModule } from "./app-utilization-routing.module";
 import { AppUtilizationComponent } from "./app-utilization.component";
@@ -34,7 +34,7 @@ import { FormsModule } from "@angular/forms";
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    CdkTableModule
   ]
 })
 export class AppUtilizationModule {}

@@ -20,3 +20,59 @@
     flex: 1 1 auto;
   }
 }
+
+.table {
+  border-spacing: 0;
+  border: 1px solid lightgray;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  width: 100%;
+
+  // TODO change header alignment to left for every column
+
+  // common column style
+  @mixin cdk-column {
+    padding: 8px 16px;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+
+    // last in a row
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  .cdk-column {
+    // individual column alignments
+
+    &-name {
+      @include cdk-column();
+      text-align: left;
+    }
+
+    &-email {
+      @include cdk-column();
+      text-align: left;
+    }
+
+    &-appUtilizationPercent {
+      @include cdk-column();
+      text-align: right;
+    }
+
+    &-lastActive {
+      @include cdk-column();
+      text-align: left;
+    }
+
+    &-billingPeriod {
+      @include cdk-column();
+      text-align: left;
+    }
+
+    &-paymentPlan {
+      @include cdk-column();
+      text-align: left;
+    }
+  }
+}
