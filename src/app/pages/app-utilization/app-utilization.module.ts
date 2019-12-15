@@ -4,13 +4,18 @@ import {
   MatButtonModule,
   MatIconModule,
   MatDividerModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatTableModule,
+  MatFormFieldModule
 } from "@angular/material";
 
 import { AppUtilizationRoutingModule } from "./app-utilization-routing.module";
 import { AppUtilizationComponent } from "./app-utilization.component";
 import { AssignedLicencesComponent } from "./assigned-licences/assigned-licences.component";
 import { UnassignedLicencesComponent } from "./unassigned-licences/unassigned-licences.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,11 +25,16 @@ import { UnassignedLicencesComponent } from "./unassigned-licences/unassigned-li
   ],
   imports: [
     CommonModule,
+    FormsModule,
     AppUtilizationRoutingModule,
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule
   ]
 })
 export class AppUtilizationModule {}
