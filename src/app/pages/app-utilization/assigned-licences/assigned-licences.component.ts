@@ -7,6 +7,7 @@ import {
 } from "./assigned-licenses-datasource";
 import { BackendService } from "src/app/services/backend.service";
 import { debounceTime } from "rxjs/operators";
+import { PageEvent } from "src/app/shared/components/table-paginator/table-paginator.component";
 
 @Component({
   selector: "app-assigned-licences",
@@ -62,5 +63,13 @@ export class AssignedLicencesComponent implements OnInit {
 
   public filter(event) {
     this.filterSubject.next(event.target.value);
+  }
+
+  public onPageChange(event: PageEvent) {
+    console.log(event);
+    this.dataSource.setPage({
+      pageNumber: event.pageIndex,
+      resultsPerPage: event.pageSize
+    });
   }
 }

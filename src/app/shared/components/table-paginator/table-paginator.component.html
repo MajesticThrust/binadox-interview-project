@@ -1,0 +1,37 @@
+<!-- page size selector -->
+<div>
+  <span>Show </span>
+  <div class="size-option-group" *ngIf="!hidePageSize">
+    <span
+      class="size-option"
+      *ngFor="let option of pageSizeOptions; last as isLast"
+      (click)="_changePageSize(option)"
+      [class.size-option-selected]="option == pageSize"
+    >
+      {{ option }}
+    </span>
+  </div>
+  <span> per page</span>
+</div>
+
+<!-- page selector -->
+<div class="page-button-group">
+  <button class="page-button">Previous</button>
+
+  <!-- First page -->
+  <button class="page-button" *ngIf="showFirstLastButtons">...</button>
+
+  <!-- Page numbers -->
+  <button
+    class="page-button"
+    *ngFor="let page of currentPageRange"
+    (click)="setPage(page)"
+  >
+    {{ page }}
+  </button>
+
+  <!-- Last page -->
+  <button class="page-button" *ngIf="showFirstLastButtons">...</button>
+
+  <button class="page-button">Next</button>
+</div>

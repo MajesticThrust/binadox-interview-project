@@ -35,6 +35,7 @@ export class AssignedLicencesDataSource
    * Column map to ease the sorting.
    * Keys - table columns, values - object paths in backend response type.
    */
+  // TODO
   private columnMap: {
     id: "accountUsageDataDto.";
   };
@@ -57,7 +58,7 @@ export class AssignedLicencesDataSource
       switchMap(([page, filter, sort]) => {
         return this.backend.assignedLicences({
           query: filter,
-          page: page.pageNumber,
+          offset: (page.pageNumber - 1) * page.resultsPerPage,
           limit: page.resultsPerPage,
           sort: sort.map(c => c.column),
           order: sort.map(c => c.order)
@@ -65,7 +66,7 @@ export class AssignedLicencesDataSource
       }),
       // tap(console.log),
       map(response => {
-        return response.map(item => {
+        return response.items.map(item => {
           const row: AssignedLicencesRow = {
             id: item.accountUsageDataDto.accId,
             name: item.accountUsageDataDto.name,

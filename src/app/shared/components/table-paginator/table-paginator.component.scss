@@ -1,0 +1,33 @@
+.size-option-group {
+  display: inline;
+
+  .size-option {
+    text-align: center;
+    color: blue;
+
+    &:not(:first-child) {
+      border-left: 1px solid lightgray;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    // padding: 0 4px;
+    // pixel-perfect-ish?
+    padding-left: 6px;
+    padding-right: 4px;
+
+    &-selected {
+      color: gray;
+
+      &:hover {
+        cursor: auto;
+      }
+    }
+  }
+}
+
+.page-button {
+
+}

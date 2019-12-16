@@ -16,14 +16,19 @@ export enum ListSortOrder {
 export interface ListParams {
   /** search query */
   query?: string;
-  /** page number */
-  page?: number;
-  /** limit items per page */
+  /** element slice offset */
+  offset?: number;
+  /** slice element count */
   limit?: number;
   /** sorted fields */
   sort?: string | string[];
   /** sorting order; default - ascending */
   order?: ListSortOrder | ListSortOrder[];
+}
+
+export interface AssignedLicencesResponse {
+  total: number;
+  items: AssignedLicencesResponseItem[];
 }
 
 export interface AssignedLicencesResponseItem {
@@ -39,35 +44,52 @@ export class BackendService {
 
   public assignedLicences(
     params: ListParams
-  ): Observable<AssignedLicencesResponseItem[]> {
+  ): Observable<AssignedLicencesResponse> {
     const url = `${environment.backendUrl}/users`;
 
     return this.http
       .get<AssignedLicencesResponseItem[]>(url, {
-        params: this.listParamsToHttp(params)
+        params: this.listParamsToHttp(params),
+        observe: "response"
       })
       .pipe(
         map(response => {
-          return response.map(({ accountUsageDataDto, usageDetailDto }) => {
-            accountUsageDataDto = new AccountUsageData().deserialize(
-              accountUsageDataDto
+          // console.log(response);
+          const result: AssignedLicencesResponse = {
+            // appearantly json-server doesn't send this header despite the docs
+            // (https://github.com/typicode/json-server#slice)
+            total: response.headers["X-Total-Count"],
+            items: []
+          };
+
+          if (response.body !== null) {
+            result.items = response.body.map(
+              ({ accountUsageDataDto, usageDetailDto }) => {
+                accountUsageDataDto = new AccountUsageData().deserialize(
+                  accountUsageDataDto
+                );
+                usageDetailDto = new UsageDetail().deserialize(usageDetailDto);
+
+                const item: AssignedLicencesResponseItem = {
+                  accountUsageDataDto,
+                  usageDetailDto
+                };
+
+                return item;
+              }
             );
-            usageDetailDto = new UsageDetail().deserialize(usageDetailDto);
+          }
 
-            const result: AssignedLicencesResponseItem = {
-              accountUsageDataDto,
-              usageDetailDto
-            };
-
-            return result;
-          });
+          return result;
         })
       );
   }
 
   private listParamsToHttp(params: ListParams): HttpParams {
-    const page = params.page ? params.page.toString() : undefined;
-    const limit = params.limit ? params.limit.toString() : undefined;
+    const start =
+      typeof params.offset === "number" ? params.offset.toString() : undefined;
+    const limit =
+      typeof params.limit === "number" ? params.limit.toString() : undefined;
     const sort =
       typeof params.sort === "string" ? params.sort : params.sort.join(",");
     const order =
@@ -76,7 +98,7 @@ export class BackendService {
     return new HttpParams({
       fromObject: {
         q: params.query,
-        _page: page,
+        _start: start,
         _limit: limit,
         _sort: sort,
         _order: order
