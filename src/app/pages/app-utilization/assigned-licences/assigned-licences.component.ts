@@ -29,6 +29,10 @@ export class AssignedLicencesComponent implements OnInit {
     "paymentPlan"
   ];
 
+  // appearantly json-server doesn't return total count of elements
+  // so I had to hardcode it; have no time to change backend
+  public dataLength = 50;
+
   private dataSource: AssignedLicencesDataSource;
 
   private filterSubject = new BehaviorSubject("");
@@ -68,7 +72,7 @@ export class AssignedLicencesComponent implements OnInit {
   public onPageChange(event: PageEvent) {
     console.log(event);
     this.dataSource.setPage({
-      pageNumber: event.pageIndex,
+      pageNumber: event.pageNumber,
       resultsPerPage: event.pageSize
     });
   }

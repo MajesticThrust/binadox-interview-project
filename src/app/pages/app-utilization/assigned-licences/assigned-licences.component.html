@@ -1,4 +1,4 @@
-<div class="table-controls">
+<div class="table-controls-header">
   <mat-checkbox
     class="item"
     [ngModel]="checkboxes.underutilizedLicences"
@@ -69,10 +69,18 @@
   <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<app-table-paginator
-  [pageSizeOptions]="[15, 30, 50]"
-  [pageSize]="15"
-  [pageSelectorRange]="5"
-  [pageIndex]="1"
-  (page)="onPageChange($event)"
-></app-table-paginator>
+<div class="table-controls-footer">
+  <div class="item">
+    <!-- TODO download buttons -->
+  </div>
+
+  <div class="space-filler"></div>
+
+  <app-table-paginator
+    class="item"
+    [pageSizeOptions]="[15, 30, 50]"
+    [pageSelectorRange]="5"
+    [length]="dataLength"
+    (page)="onPageChange($event)"
+  ></app-table-paginator>
+</div>

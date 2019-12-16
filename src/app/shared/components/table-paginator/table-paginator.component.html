@@ -1,37 +1,53 @@
-<!-- page size selector -->
-<div>
-  <span>Show </span>
-  <div class="size-option-group" *ngIf="!hidePageSize">
-    <span
-      class="size-option"
-      *ngFor="let option of pageSizeOptions; last as isLast"
-      (click)="_changePageSize(option)"
-      [class.size-option-selected]="option == pageSize"
-    >
-      {{ option }}
-    </span>
+<div class="container">
+  <!-- page size selector -->
+  <div class="size-options">
+    <span>Show </span>
+    <div class="size-numbers" *ngIf="!hidePageSize">
+      <span
+        class="size-option"
+        *ngFor="let option of pageSizeOptions"
+        (click)="selectPageSize(option)"
+        [class.size-option-selected]="option == pageSize"
+      >
+        {{ option }}
+      </span>
+    </div>
+    <span> per page</span>
   </div>
-  <span> per page</span>
-</div>
 
-<!-- page selector -->
-<div class="page-button-group">
-  <button class="page-button">Previous</button>
+  <!-- page selector -->
+  <div class="page-buttons">
+    <button
+      class="page-button"
+      [disabled]="!prevPageEnabled"
+      (click)="prevPage()"
+    >
+      Previous
+    </button>
 
-  <!-- First page -->
-  <button class="page-button" *ngIf="showFirstLastButtons">...</button>
+    <!-- First page -->
+    <button class="page-button" *ngIf="showFirstLastButtons">...</button>
 
-  <!-- Page numbers -->
-  <button
-    class="page-button"
-    *ngFor="let page of currentPageRange"
-    (click)="setPage(page)"
-  >
-    {{ page }}
-  </button>
+    <!-- Page numbers -->
+    <button
+      class="page-button"
+      *ngFor="let page of currentPageRange"
+      (click)="setPage(page)"
+      [disabled]="page == pageNumber"
+      [class.active-page]="page == pageNumber"
+    >
+      {{ page }}
+    </button>
 
-  <!-- Last page -->
-  <button class="page-button" *ngIf="showFirstLastButtons">...</button>
+    <!-- Last page -->
+    <button class="page-button" *ngIf="showFirstLastButtons">...</button>
 
-  <button class="page-button">Next</button>
+    <button
+      class="page-button"
+      [disabled]="!nextPageEnabled"
+      (click)="nextPage()"
+    >
+      Next
+    </button>
+  </div>
 </div>
